@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"time"
 )
 
 func add_order_to_json(newOrder Order) {
@@ -13,6 +14,7 @@ func add_order_to_json(newOrder Order) {
 	currentOrders, err := get_data_from_json()
 	if err != nil {
 		fmt.Println("Ошибка при открытии / чтении файла")
+		fmt.Println(err)
 	}
 
 	// Добавляем новый заказ в список
@@ -63,4 +65,11 @@ func write_data_to_json(orders_data []Order) error {
 	}
 
 	return nil
+}
+
+func convert_storage_days_to_data(storage_days int) string {
+	now := time.Now()
+	final_date := now.AddDate(0, 0, storage_days)
+	formatted := final_date.Format("01-02-2006")
+	return formatted
 }

@@ -20,7 +20,7 @@ func GetordersList() {
 	fmt.Println("Список заказов клиента: ")
 	for _, order := range all_orders {
 		if order.UserID == clientID {
-			fmt.Printf("OrderID: %d, UserID: %d, StorageDays: %d\n", order.OrderID, order.UserID, order.StorageDays)
+			fmt.Printf("OrderID: %d, UserID: %d, StorageDate: %s\n", order.OrderID, order.UserID, order.StorageDate)
 		}
 	}
 	fmt.Println()

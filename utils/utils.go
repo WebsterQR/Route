@@ -9,7 +9,7 @@ const datafile_name = "orders_data.json"
 type Order struct {
 	OrderID     uint64 `json:"order_id"`
 	UserID      uint64 `json:"user_id"`
-	StorageDays uint64 `json:"storage_days"`
+	StorageDate string `json:"storage_date"`
 }
 
 // 1 Принять заказ от курьера

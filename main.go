@@ -7,11 +7,11 @@ import (
 	"slices"
 )
 
-type Order struct {
-	order_id     uint8 `json:"order_id"`
-	user_id      uint8 `json:"user_id"`
-	storage_days uint8 `json:"storage_days"`
-}
+// type Order struct {
+// 	order_id     uint8 `json:"order_id"`
+// 	user_id      uint8 `json:"user_id"`
+// 	storage_days uint8 `json:"storage_days"`
+// }
 
 const (
 	base_console_print = `Список доступных команд:
