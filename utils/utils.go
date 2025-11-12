@@ -1,60 +1,35 @@
 package utils
 
 import (
-	"encoding/json"
 	"fmt"
-	"os"
 )
 
 const datafile_name = "orders_data.json"
 
 type Order struct {
-	OrderID     uint8 `json:"order_id"`
-	UserID      uint8 `json:"user_id"`
-	StorageDays uint8 `json:"storage_days"`
+	OrderID     uint64 `json:"order_id"`
+	UserID      uint64 `json:"user_id"`
+	StorageDays uint64 `json:"storage_days"`
 }
 
-func NewOrder() {
-	var newOrder Order
-	fmt.Println("Введите номер заказа:")
-	fmt.Scan(&newOrder.OrderID)
+// 1 Принять заказ от курьера
+// На вход принимается ID заказа, ID получателя и срок хранения. Заказ нельзя принять дважды. Если срок хранения в прошлом, приложение должно выдать ошибку. Список принятых заказов необходимо сохранять в файл. Формат файла остается на выбор автора.
 
-	fmt.Println("Введите номер пользователя:")
-	fmt.Scan(&newOrder.UserID)
+// 2 Вернуть заказ курьеру
+// На вход принимается ID заказа. Метод должен удалять заказ из вашего файла. Можно вернуть только те заказы, у которых вышел срок хранения и если заказы не были выданы клиенту.
 
-	fmt.Println("Введите количество дней хранения:")
-	fmt.Scan(&newOrder.StorageDays)
+// 3 Выдать заказы и принять возвраты клиента
+// На вход принимается ID пользователя и ID заказов, а также действие, которое необходимо совершить (принять возврат или выдать заказы). Можно выдавать только те заказы, которые были приняты от курьера и чей срок хранения ещё не истек. Принимать возврат заказов можно, только если не прошло более двух суток с момента выдачи. Все ID заказов должны принадлежать только одному клиенту.
 
-	// Проверка на существование файла
-	file, err := os.Open(datafile_name)
-	var currentOrders []Order
-	if err == nil {
-		defer file.Close()
+// 4 Получить список заказов
+// На вход принимается ID пользователя как обязательный параметр и опциональные параметры.
+// Параметры позволяют получать только последние N заказов или заказы клиента, находящиеся в нашем ПВЗ.
 
-		// Считываем уже имеющиеся данные
-		err = json.NewDecoder(file).Decode(&currentOrders)
-		if err != nil {
-			currentOrders = []Order{}
-		}
-	}
-	currentOrders = append(currentOrders, newOrder)
-	file, err = os.Create(datafile_name)
-	if err != nil {
-		fmt.Println("Ошибка при создании файла")
-		return
-	}
-	defer file.Close()
-	encoder := json.NewEncoder(file)
-	encoder.SetIndent("", " ")
-	err = encoder.Encode(currentOrders)
-	if err != nil {
-		fmt.Println("Ошибка при записи")
-		return
-	} else {
-		fmt.Println("Успешно записано")
-	}
+// 5 Получить список возвратов
+// Метод должен выдавать список с постраничной пагинацией.
 
-}
+// 6 олучить историю заказов
+// Метод должен выдавать список заказов в порядке изменения их последнего состояния.
 
 func RefundOrder() {
 	fmt.Println("Вызвано 2")
@@ -62,10 +37,6 @@ func RefundOrder() {
 
 func PushPrders() {
 	fmt.Println("3")
-}
-
-func GetordersList() {
-	fmt.Println("4")
 }
 
 func GetRefundsList() {

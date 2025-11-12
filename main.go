@@ -42,20 +42,23 @@ func main() {
 	input_symbol := ""
 	for input_symbol != "exit" {
 		input_symbol = get_user_input()
+		if input_symbol == "exit" {
+			return
+		}
 		if slices.Contains(available_inputs, input_symbol) {
 			switch input_symbol {
 			case "1":
 				utils.NewOrder()
 			case "2":
-				return
+				fmt.Println("In progress....")
 			case "3":
-				return
+				fmt.Println("In progress....")
 			case "4":
-				return
+				utils.GetordersList()
 			case "5":
-				return
+				fmt.Println("In progress....")
 			case "6":
-				return
+				fmt.Println("In progress....")
 			}
 		} else {
 			error_input()
